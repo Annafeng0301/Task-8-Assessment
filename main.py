@@ -1,3 +1,5 @@
+# Anna Feng shoes database application
+# imports
 import sqlite3
 
 db = sqlite3.connect("shoes.db")
