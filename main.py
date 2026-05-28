@@ -15,7 +15,7 @@ def print_all_shoes():
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("brand          model size colour")
+    print("brand          model               size    colour")
     for shoe in results:
         print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
@@ -23,14 +23,14 @@ def print_all_shoes():
 
 
 def print_all_shoes_by_brand():
-    '''print all the shoes nicely'''
+    '''print shoes sorted by brand nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * FROM shoes OERDER BY brand ASC;"
+    sql = "SELECT * FROM shoes ORDER BY brand ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("brand          model size colour")
+    print("brand          model               size    colour")
     for shoe in results:
         print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
@@ -38,14 +38,14 @@ def print_all_shoes_by_brand():
 
 
 def print_all_shoes_by_model():
-    '''print all the shoes nicely'''
+    '''print shoes sorted by model nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * FROM shoes OERDER BY model ASC;"
+    sql = "SELECT * FROM shoes ORDER BY model ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("brand          model size colour")
+    print("brand          model               size    colour")
     for shoe in results:
         print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
@@ -53,14 +53,14 @@ def print_all_shoes_by_model():
 
 
 def print_all_shoes_by_size():
-    '''print all the shoes nicely'''
+    '''print shoes sorted by size nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * FROM shoes OERDER BY size ASC;"
+    sql = "SELECT * FROM shoes ORDER BY size ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("brand          model size colour")
+    print("brand          model               size    colour")
     for shoe in results:
         print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
@@ -68,17 +68,34 @@ def print_all_shoes_by_size():
 
 
 def print_all_shoes_by_colour():
-    '''print all the shoes nicely'''
+    '''print shoes sorted by colour nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * FROM shoes OERDER BY colour ASC;"
+    sql = "SELECT * FROM shoes ORDER BY colour ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("brand          model size colour")
+    print("brand          model               size    colour")
     for shoe in results:
         print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
+    db.close()
+
+
+def search_shoes_by_brand(brand):
+    '''search shoes by brand'''
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+    sql = "SELECT * FROM shoes WHERE brand = ?;"
+    cursor.execute(sql, (brand,))
+    results = cursor.fetchall()
+    # loop through all the results
+    print("brand          model               size    colour")
+    if len(results) == 0:
+        print("No shoes found")
+    else:
+        for shoe in results:
+            print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     db.close()
 
 
@@ -92,7 +109,9 @@ What would you like to do.
 3. Print all shoes sorted by model
 4. Print all shoes sorted by size
 5. Print all shoes sorted by colour
-6. Exit
+6. Search shoes by brand
+7. Exit
+
 """)
     if user_input == "1":
         print_all_shoes()
@@ -105,6 +124,9 @@ What would you like to do.
     elif user_input == "5":
         print_all_shoes_by_colour()
     elif user_input == "6":
+        brand = input("Enter the brand to search for: ")
+        search_shoes_by_brand(brand)
+    elif user_input == "7":
         break
     else:
         print("That was not an option\n")
