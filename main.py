@@ -99,20 +99,54 @@ def search_shoes_by_brand(brand):
     db.close()
 
 
+def add_shoes():
+    '''add a new shoe'''
+
+    brand = input("Enter brand: ")
+    model = input("Enter model: ")
+    size = input("Enter shoe size: ")
+    colour = input("Enter colour: ")
+
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+
+    sql = "INSERT INTO shoes (brand, model, size, colour) VALUES (?, ?, ?, ?);"
+
+    cursor.execute(sql, (brand, model, size, colour))
+
+    db.commit()
+
+    print("Shoe added successfully")
+
+    db.close()
+
+
+def update_shoes_colour():
+    '''update shoe colour'''
+
+    shoes_id = input("Enter shoe ID to update: ")
+    new_colour = input("Enter new colour: ")
+
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+
+    sql = "UPDATE shoes SET colour = ? WHERE id = ?;"
+
+    cursor.execute(sql, (new_colour, shoes_id))
+
+    db.commit()
+
+    if cursor.rowcount == 0:
+        print("No shoe found")
+    else:
+        print("Shoe updated successfully")
+
+    db.close()
+
+
 # main code
 while True:
-    user_input = input(
-"""
-What would you like to do.
-1. Print all shoes
-2. Print all shoes sorted by brand
-3. Print all shoes sorted by model
-4. Print all shoes sorted by size
-5. Print all shoes sorted by colour
-6. Search shoes by brand
-7. Exit
-
-""")
+    user_input = input("\nWhat would you like to do.\n1. Print all shoes\n2. Print all shoes sorted by brand\n3. Print all shoes sorted by model\n4. Print all shoes sorted by size\n5. Print all shoes sorted by colour\n6. Search shoes by brand\n7. Add shoe\n8. Update shoe colour\n9. Exit\n")
     if user_input == "1":
         print_all_shoes()
     elif user_input == "2":
@@ -127,6 +161,10 @@ What would you like to do.
         brand = input("Enter the brand to search for: ")
         search_shoes_by_brand(brand)
     elif user_input == "7":
+        add_shoes()
+    elif user_input == "8":
+        update_shoes_colour()
+    elif user_input == "9":
         break
     else:
         print("That was not an option\n")
