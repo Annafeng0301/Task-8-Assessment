@@ -11,13 +11,13 @@ def print_all_shoes():
     '''print all the shoes nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * from shoes;"
+    sql = "SELECT * FROM shoes;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("name                          brand   model size colour")
-    for shoes in results:
-        print(f"{shoes[1]:<15}{shoes[2]:<20}{shoes[3]:<8}{shoes[4]:<10}")
+    print("brand          model size colour")
+    for shoe in results:
+        print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
     db.close()
 
@@ -26,13 +26,13 @@ def print_all_shoes_by_brand():
     '''print all the shoes nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * from shoes;"
+    sql = "SELECT * FROM shoes OERDER BY brand ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("name                          brand   model size colour")
-    for shoes in results:
-        print(f"{shoes[1]:<15}{shoes[2]:<20}{shoes[3]:<8}{shoes[4]:<10}")
+    print("brand          model size colour")
+    for shoe in results:
+        print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
     db.close()
 
@@ -41,13 +41,13 @@ def print_all_shoes_by_model():
     '''print all the shoes nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * from shoes;"
+    sql = "SELECT * FROM shoes OERDER BY model ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("name                          brand   model size colour")
-    for shoes in results:
-        print(f"{shoes[1]:<15}{shoes[2]:<20}{shoes[3]:<8}{shoes[4]:<10}")
+    print("brand          model size colour")
+    for shoe in results:
+        print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
     db.close()
 
@@ -56,13 +56,13 @@ def print_all_shoes_by_size():
     '''print all the shoes nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * from shoes;"
+    sql = "SELECT * FROM shoes OERDER BY size ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("name                          brand   model size colour")
-    for shoes in results:
-        print(f"{shoes[1]:<15}{shoes[2]:<20}{shoes[3]:<8}{shoes[4]:<10}")
+    print("brand          model size colour")
+    for shoe in results:
+        print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
     db.close()
 
@@ -71,13 +71,13 @@ def print_all_shoes_by_colour():
     '''print all the shoes nicely'''
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * from shoes;"
+    sql = "SELECT * FROM shoes OERDER BY colour ASC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     # loop through all the results
-    print("name                          brand   model size colour")
-    for shoes in results:
-        print(f"{shoes[1]:<15}{shoes[2]:<20}{shoes[3]:<8}{shoes[4]:<10}")
+    print("brand          model size colour")
+    for shoe in results:
+        print(f"{shoe[1]:<15}{shoe[2]:<20}{shoe[3]:<8}{shoe[4]:<10}")
     # loop finished here
     db.close()
 
