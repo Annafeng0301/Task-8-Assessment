@@ -108,43 +108,63 @@ def search_shoes_by_brand(brand):
 def add_shoes():
     '''add a new shoe'''
 
+    # Ask the user to enter shoe details
     brand = input("Enter brand: ")
     model = input("Enter model: ")
     size = input("Enter shoe size: ")
+    # Check if the size entered is a number
+    if not size.isdigit():
+        # Display error message if size is invalid
+        print("Invalid size")
+        return
     colour = input("Enter colour: ")
 
+    # Conncet to the database
     db = sqlite3.connect(DATABASE)
+    # Creat a cursor to run SQL commands
     cursor = db.cursor()
 
+    # SQL query to insert a new shoe into the database
     sql = "INSERT INTO shoes (brand, model, size, colour) VALUES (?, ?, ?, ?);"
 
+    # Execute the INSERT statement with user inputs
     cursor.execute(sql, (brand, model, size, colour))
 
+    # Save changes to the database
     db.commit()
 
+    # Check if the shoe was added successfully
     if cursor.rowcount == 0:
         print("Shoe not added")
     else:
         print("Shoe added successfully")
 
+    # Close the database
     db.close()
 
 
 def update_shoes_colour():
     '''update shoe colour'''
 
+    # Get shoe ID from user
     shoes_id = input("Enter shoe ID to update: ")
+    # Get new colour from user
     new_colour = input("Enter new colour: ")
 
     db = sqlite3.connect(DATABASE)
+    # Create cursor
     cursor = db.cursor()
 
+    # SQL query to update colour
     sql = "UPDATE shoes SET colour = ? WHERE id = ?;"
 
+    # Execute SQL update command
     cursor.execute(sql, (new_colour, shoes_id))
 
+    # Commit database changes
     db.commit()
 
+    # Check if update was successfully
     if cursor.rowcount == 0:
         print("No shoe found")
     else:
@@ -153,8 +173,9 @@ def update_shoes_colour():
     db.close()
 
 
-# main code
+# main program loop
 while True:
+    # Display menu and get user input
     user_input = input("\nWhat would you like to do.\n1. Print all shoes\n2. Print all shoes sorted by brand\n3. Print all shoes sorted by model\n4. Print all shoes sorted by size\n5. Print all shoes sorted by colour\n6. Search shoes by brand\n7. Add shoe\n8. Update shoe colour\n9. Exit\n")
     if user_input == "1":
         print_all_shoes()
@@ -175,5 +196,7 @@ while True:
         update_shoes_colour()
     elif user_input == "9":
         break
+    # If input is invalid
     else:
+        # Display error message
         print("That was not an option\n")
