@@ -1,4 +1,4 @@
-# docstring- Anna Feng- airb=plane database applicantion
+# docstring- Anna Feng - shoes database application
 # imports
 import sqlite3
 
@@ -8,11 +8,17 @@ DATABASE = "shoes.db"
 
 # function
 def print_all_shoes():
+    # Display all shoe records in a formatted manner
     '''print all the shoes nicely'''
+    # Connect to the SQLite database specified by DATABASE
     db = sqlite3.connect(DATABASE)
+    # Create a cursor object to interact with the database
     cursor = db.cursor()
+    # SQL query to select all records from the 'shoes' table
     sql = "SELECT * FROM shoes;"
+    # Execute the SQL query using the cursor object
     cursor.execute(sql)
+    # Fetch all results from the executed query and store them in the 'results' variable
     results = cursor.fetchall()
     # loop through all the results
     print("brand          model               size    colour")
@@ -116,7 +122,10 @@ def add_shoes():
 
     db.commit()
 
-    print("Shoe added successfully")
+    if cursor.rowcount == 0:
+        print("Shoe not added")
+    else:
+        print("Shoe added successfully")
 
     db.close()
 
